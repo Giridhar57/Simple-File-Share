@@ -1,0 +1,25 @@
+{%extends 'base.html'%}
+{%block content%}
+<a href="{%url 'home'%}" class="link-primary">Home</a>
+      <h2 style="text-align: center;">All Files Uploaded by Your Peers</h2>
+      <div class="container d-flex justify-content-around">
+        <div class="card text-center" style="width: 25rem;">
+            <div class="card-header">
+                <b>My Uploads</b>
+            </div>
+            <ul class="list-group list-group-flush">
+                {%for file in files%}
+        {%if user.id == file.user.id%}
+            <li class="list-group-item"><b>{{file.name}}</b> by You</li>
+        {%else%}
+            <li class="list-group-item">
+                <b>{{file.name}}</b> by <i>{{file.user}}</i>
+                [<a href="{%url 'file_view' file_name=file.file.name%}" class="link-success">Download</a>]
+                [<a href="{%url 'import_file' file.id%}" class="link-primary">Import</a>]
+            </li>
+        {%endif%}
+    {%endfor%}
+            </ul>
+        </div>
+      </div>
+{%endblock%}

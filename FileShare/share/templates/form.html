@@ -1,0 +1,17 @@
+{%extends 'base.html'%}
+{%block content%}
+<a href="{%url 'home'%}" class="link-primary">Home</a>
+    <h1 style="text-align: center;">Upload a New File</h1>
+    <div class="container d-flex justify-content-around">
+        <form action="addfile" method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for entry in form %}
+               <div class="mb-3">
+                    <label class="form-label">{{ entry.label_tag }}</label>
+                    {{entry}}
+               </div>
+            {% endfor %}
+            <button class="btn btn-primary">Upload</button>
+        </form>
+    </div>
+{%endblock%}

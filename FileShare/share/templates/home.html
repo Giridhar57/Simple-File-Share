@@ -1,0 +1,32 @@
+{%extends 'base.html'%}
+{%block content%}
+<div class="container d-flex justify-content-around">
+  <div class="card text-center" style="width: 25rem;">
+      <div class="card-header">
+          <b>My Uploads</b>
+      </div>
+      <ul class="list-group list-group-flush">
+          {%if not files%}
+          <li class="list-group-item">No Uploads</li>
+          {%endif%}
+          {%for file in files%}
+              <li class="list-group-item">{{file.name}}: <a href="{%url 'file_view' file_name=file.file.name%}" class="link-success">Download</a>
+                  [<a href="{%url 'delete_file' file.id%}" class="link-danger">Delete</a>]</li>
+          {%endfor%}
+      </ul>
+    </div>
+    {%if imports%}
+    <div class="card text-center" style="width: 25rem;">
+      <div class="card-header">
+          <b>My Imports</b>
+      </div>
+      <ul class="list-group list-group-flush">
+          {%for file in imports%}
+              <li class="list-group-item">{{file.name}}: <a href="{%url 'file_view' file_name=file.file.name%}" class="link-success">Download</a>
+                  [<a href="{%url 'delete_file' file.id%}" class="link-danger">Delete</a>]</li>
+          {%endfor%}
+      </ul>
+    </div>
+  {%endif%}
+</div>
+{%endblock%}

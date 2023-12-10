@@ -1,0 +1,36 @@
+{%extends 'base.html'%}
+{%block content%}
+<a href="{%url 'home'%}" class="link-primary">Home</a><br>
+      <div class="container-fluid" style="width: 50%;">
+        <form class="d-flex" action="">
+          <input class="form-control me-2" type="text" placeholder="Search User" name="search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div><br><br>
+      <div class="container d-flex justify-content-around">
+        <div class="card text-center" style="width: 25rem;">
+            
+          {%if filteredusers%}
+        <a href="{%url 'view_users'%}" class="link-primary">All Users</a>
+        <div class="card-header">
+            <b>Filtered Users</b>
+        </div>
+        <ul class="list-group list-group-flush">
+            {%for user in filteredusers%}
+            <li class="list-group-item"><a href="{%url 'user_profile' user.id%}" style="text-decoration: none;">{{user}}</a></li>
+            {%endfor%}
+        </ul>
+    {%else%}
+        <li class="list-group-item text-danger">{{msg}}</li>
+        <div class="card-header">
+            <b>All Users</b>
+        </div>
+        <ul class="list-group list-group-flush">
+            {%for user in users%}
+            <li class="list-group-item"><a href="{%url 'user_profile' user.id%}" style="text-decoration: none;">{{user}}</a></li>
+            {%endfor%}
+        </ul>
+    {%endif%}
+      </div>
+      </div>
+{%endblock%}
